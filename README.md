@@ -160,28 +160,50 @@ exit시 nginx 컨테이너 중지안됌#용도:작업,디버깅
 
 > (A) NGINX 베이스 이미지 + 정적 콘텐츠 교체
 
+
+ ### 웹서버 소스 코드
+
+'''
+index.html	웹페이지의 내용 (텍스트, 구조)
+Pikachu.png	웹페이지에 표시되는 이미지
+'''
+
+
 ### 6-2. Dockerfile 내용
 
-```dockerfile
--실습미수행-
+```
+FROM nginx:latest
+
+RUN rm /usr/share/nginx/html/index.html
+
+COPY index.html /usr/share/nginx/html/
+
+COPY assets/ /usr/share/nginx/html/assets/
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
 ### 6-3. 커스텀 포인트 및 목적
 
-| 커스텀 포인트 | 목적 |
-|--------------|------|
-| -실습미수행- | -실습미수행- |
+|커스텀 포인트|목적|
+|index.html 교체|	기본 NGINX 페이지 대신 한글 콘텐츠 표시|
+|Pikachu.png 추가|	정적 이미지 파일 포함하여 웹페이지 완성도 향상|
+|EXPOSE 80| 컨테이너의 80번 포트를 외부에 공개|
+
 
 ### 6-4. 빌드 명령 및 결과
 
-```bash
--실습미수행-
+```
+![Build](/assets/build.png)
+
 ```
 
 ### 6-5. 컨테이너 실행 명령 및 결과
 
-```bash
--실습미수행-
+```
+![run](./assets/run.png)
 ```
 
 ---
@@ -190,13 +212,15 @@ exit시 nginx 컨테이너 중지안됌#용도:작업,디버깅
 
 ### 7-1. 실행 명령
 
-```bash
--실습미수행-
+```
+위사진 참고
 ```
 
 ### 7-2. 브라우저 접속 화면 (주소창 + 응답 화면 포함)
 
-> -실습미수행- (스크린샷 첨부 예정)
+
+![myweb](image.png)
+
 
 ---
 
@@ -1027,3 +1051,59 @@ CONTAINER ID   IMAGE     COMMAND                   CREATED              STATUS  
 
 admin@PC-1 MINGW64 /c/오디세이/mission1_1
 $ #attach는 메인프로세스에 직접연결로 exit하면 컨테이너 중지
+
+#####BAHS에서는 이미지 경로를 계속 변환시켜서 파워셀로 변경
+PS C:\Users\rlawjd85206977\Mission1_1> docker build -t my-nginx:1.0 .
+[+] Building 0.8s (9/9) FINISHED           docker:desktop-linux
+ => [internal] load build definition from Dockerfile       0.0s
+ => => transferring dockerfile: 238B                       0.0s
+ => [internal] load metadata for docker.io/library/nginx:  0.0s
+ => [internal] load .dockerignore                          0.0s
+ => => transferring context: 2B                            0.0s
+ => CACHED [1/4] FROM docker.io/library/nginx:latest@sha2  0.0s
+ => => resolve docker.io/library/nginx:latest@sha256:165d  0.0s
+ => [internal] load build context                          0.1s
+ => => transferring context: 1.14MB                        0.1s
+ => [2/4] RUN rm /usr/share/nginx/html/index.html          0.2s
+ => [3/4] COPY index.html /usr/share/nginx/html/           0.1s
+ => [4/4] COPY assets/ /usr/share/nginx/html/assets/       0.0s
+ => exporting to image                                     0.3s
+ => => exporting layers                                    0.2s
+ => => exporting manifest sha256:274207317a293445e52a3859  0.0s
+ => => exporting config sha256:202783bf7a63f1d23225b871b5  0.0s
+ => => exporting attestation manifest sha256:1fac33e21510  0.0s
+ => => exporting manifest list sha256:6132c846d2aacf774a0  0.0s
+ => => naming to docker.io/library/my-nginx:1.0            0.0s
+ => => unpacking to docker.io/library/my-nginx:1.0         0.1s
+PS C:\Users\rlawjd85206977\Mission1_1> docker run -d -p 8080:80 --name my-web my-nginx:1.0
+d7dfca22152d7bc2fe469b8b72a9c77c4392f22900155498732c87140dcaf289
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint my-web (09ffbb829c51f218fb5da290b9c66e6373b9807107d1d860ba8cef6367dbaac5): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+Run 'docker run --help' for more information
+
+What's next:
+    Debug this container error with Gordon → docker ai "help me fix this container error"
+PS C:\Users\rlawjd85206977\Mission1_1> docker ps
+CONTAINER ID   IMAGE          COMMAND                   CREATED          STATUS          PORTS                                     NAMES
+2965c45bb0fd   f219f78398eb   "/docker-entrypoint.…"   25 minutes ago   Up 25 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-nginx-container
+PS C:\Users\rlawjd85206977\Mission1_1> docker stop 2965c45bb0fd
+2965c45bb0fd
+PS C:\Users\rlawjd85206977\Mission1_1> docker rm my-nginx-container
+my-nginx-container
+PS C:\Users\rlawjd85206977\Mission1_1> docker run -d -p 8080:80 --name my-web my-nginx:1.0
+docker: Error response from daemon: Conflict. The container name "/my-web" is already in use by container "d7dfca22152d7bc2fe469b8b72a9c77c4392f22900155498732c87140dcaf289". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+
+What's next:
+    Debug this container error with Gordon → docker ai "help me fix this container error"
+PS C:\Users\rlawjd85206977\Mission1_1> docker ps -a
+CONTAINER ID   IMAGE          COMMAND                   CREATED              STATUS    PORTS     NAMES
+d7dfca22152d   my-nginx:1.0   "/docker-entrypoint.…"   About a minute ago   Created             my-web
+PS C:\Users\rlawjd85206977\Mission1_1> docker rm d7dfca22152d
+d7dfca22152d
+PS C:\Users\rlawjd85206977\Mission1_1> docker run -d -p 8080:80 --name my-web my-nginx:1.0
+73ab72933faa5118a6c04c7c5099450eacf2434f52fd3a5552dd71367acd1652
+PS C:\Users\rlawjd85206977\Mission1_1> docker ps
+CONTAINER ID   IMAGE          COMMAND                   CREATED         STATUS         PORTS                                     NAMES
+73ab72933faa   my-nginx:1.0   "/docker-entrypoint.…"   4 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
