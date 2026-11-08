@@ -49,15 +49,14 @@
 
 ### 1-1. 현재 위치 / 목록 확인 (숨김 파일 포함) / 폴더 이동 / 생성 / 복사 / 이동·이름변경 / 삭제
 
-```
+
 ![basic_operation_1](./assets/basic_operation_1.png)
-```
 
 ### 1-2. 파일 내용 확인 / 빈 파일 생성
 
-```
+
 ![basic_operation2](basic_operation_2.png)
-```
+
 
 ---
 
@@ -65,24 +64,24 @@
 
 ### 2-1. 권한 확인 (변경 전)
 
-```
+
 ![alt text](assets/권한확인_파일.png)
 ![alt text](assets/디변경전.png)
-```
+
 
 ### 2-2. 권한 변경 (파일 1개 + 디렉토리 1개)
 
-```
+
 ![alt text](권한확인_파일2.png)
 ![alt text](assets/디변경.png)
-```
+
 
 ### 2-3. 권한 확인 (변경 후)
 
-```
+
 ![alt text](권한확인_파일3.png)
 ![디변경후](디변경후.png)
-```
+
 
 ---
 
@@ -90,15 +89,15 @@
 
 ### 3-1. Docker 버전 확인
 
-```
+
 ![dockerversion](imager.png)
-```
+
 
 ### 3-2. Docker 데몬 동작 확인
 
-```
+
 ![dpsinfo](image.png)
-```
+
 
 ---
 
@@ -106,24 +105,24 @@
 
 ### 4-1. 이미지 다운로드 및 목록 확인
 
-```
+
 ![imdown](image-2.png)
-```
+
 
 ### 4-2. 컨테이너 실행 / 중지 / 목록 확인
 
-```
+
 ![run](image-3.png)
 ![stopps](image-4.png)
 
-```
+
 
 ### 4-3. 로그 확인 / 리소스 확인
 
-```
+
 ![log](image-5.png)
 ![resource](image-6.png)
-```
+
 
 ---
 
@@ -131,26 +130,26 @@
 
 ### 5-1. hello-world 실행
 
-```
+
 ![dohw](image-1.png)
-```
+
 
 ### 5-2. ubuntu 컨테이너 진입 및 명령 수행
 
-```
+
 ![dockerun](image-7.png)
 
-```
+
 
 ### 5-3. attach vs exec 차이 관찰 정리
 
-```
+
 ![attach](image-8.png)
 ![attach2](image-9.png)
 exit시 nginx 컨테이너 중지됌#용도:로그 모니터링
 ![exec](image-10.png)
 exit시 nginx 컨테이너 중지안됌#용도:작업,디버깅
-```
+
 
 ---
 
@@ -163,15 +162,15 @@ exit시 nginx 컨테이너 중지안됌#용도:작업,디버깅
 
  ### 웹서버 소스 코드
 
-'''
+
 index.html	웹페이지의 내용 (텍스트, 구조)
 Pikachu.png	웹페이지에 표시되는 이미지
-'''
+
 
 
 ### 6-2. Dockerfile 내용
 
-```
+
 FROM nginx:latest
 
 RUN rm /usr/share/nginx/html/index.html
@@ -183,7 +182,7 @@ COPY assets/ /usr/share/nginx/html/assets/
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-```
+
 
 ### 6-3. 커스텀 포인트 및 목적
 
@@ -195,16 +194,16 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ### 6-4. 빌드 명령 및 결과
 
-```
-![Build](/assets/build.png)
 
-```
+![build](./assets/)
+
+
 
 ### 6-5. 컨테이너 실행 명령 및 결과
 
-```
+
 ![run](./assets/run.png)
-```
+
 
 ---
 
@@ -212,9 +211,9 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ### 7-1. 실행 명령
 
-```
+
 위사진 참고
-```
+
 
 ### 7-2. 브라우저 접속 화면 (주소창 + 응답 화면 포함)
 
