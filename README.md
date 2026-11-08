@@ -209,13 +209,13 @@ CMD ["nginx", "-g", "daemon off;"]
 ### 7-1. 실행 명령
 
 
-위사진 참고
+#### 위사진 참고
 
 
 ### 7-2. 브라우저 접속 화면 (주소창 + 응답 화면 포함)
 
 
-![myweb](image.png)
+![myweb](/assets/myweb.png)
 
 
 ---
@@ -223,17 +223,19 @@ CMD ["nginx", "-g", "daemon off;"]
 ## 8. 바인드 마운트 실습
 
 ### 8-1. 실행 명령
-```bash
--실습미수행-
-```
+
+docker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginx
 
 ### 8-2. 호스트 변경 전 화면
 
-> -실습미수행- (스크린샷 첨부 예정)
+> ![호스트변경전](image.png)
 
 ### 8-3. 호스트 변경 후 화면
 
-> -실습미수행- (스크린샷 첨부 예정)
+> ![변경후](image.png)
 
 ---
 
@@ -241,59 +243,39 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ### 9-1. 볼륨 생성 및 컨테이너 연결
 
-```bash
--실습미수행-
-```
+![볼륨연결](image.png)
 
 ### 9-2. 컨테이너 삭제 전 데이터 확인
 
-```bash
--실습미수행-
-```
+![V_BEFORE](image.png)
 
 ### 9-3. 컨테이너 삭제 후 데이터 확인 (영속성 증명)
 
-```bash
--실습미수행-
-```
-
+![V_AFTER](image.png)
 ---
 
 ## 10. Git 설정 및 GitHub 연동
 
+
+
 ### 10-1. Git 사용자 정보 / 기본 브랜치 설정
 
-```bash
--실습미수행-
-```
+![alt text](image.png)
 
 ### 10-2. git config --list 결과
+![alt text](image.png)
 
-```bash
--실습미수행-
-```
 
 ### 10-3. GitHub 연동 증거
 
-> -실습미수행- (스크린샷 첨부 예정)
+![alt text](image.png)
 
----
-
-## 🔍 검증 방법 및 결과 위치
-
-| 검증 항목 | 사용 명령 | 결과 위치 |
-|-----------|-----------|-----------|
-| Docker 설치 확인 | `docker --version` | [3-1 섹션](#3-1-docker-버전-확인) |
-| 이미지 빌드 확인 | `docker images` | [6-4 섹션](#6-4-빌드-명령-및-결과) |
-| 포트 접속 확인 | 브라우저 접속 | [7-2 섹션](#7-2-브라우저-접속-화면-주소창--응답-화면-포함) |
-| 볼륨 영속성 확인 | `docker volume inspect` | [9-3 섹션](#9-3-컨테이너-삭제-후-데이터-확인-영속성-증명) |
-| Git 설정 확인 | `git config --list` | [10-2 섹션](#10-2-git-config---list-결과) |
 
 ---
 
 ## 🚨 트러블슈팅 (2건 이상)
 
-### Case 1: -실습미수행-
+### Case 1: 
 
 | 항목 | 내용 |
 |------|------|
@@ -302,14 +284,14 @@ CMD ["nginx", "-g", "daemon off;"]
 | 확인 방법 |네이토에게 질문 |
 | 해결/대안:해결 실패 Windows NTFS 파일시스템은 Linux 권한 체계를 완전히 지원하지 않음 |
 
-### Case 2: -실습미수행-
+### Case 2: 
 
 | 항목 | 내용 |
 |------|------|
-| 문제 | -실습미수행- |
-| 원인 가설 | -실습미수행- |
-| 확인 방법 | -실습미수행- |
-| 해결/대안 | -실습미수행- |
+| 문제:포트 매핑 추가는 불가능| ![trouble](image.png) |
+| 원인 가설 | 컨테이너를 이미 만든 뒤에는 -p 8080:80 같은 포트 매핑을 “추가”할 수 없기 때문 |
+| 확인 방법 | docker ps로 실행중인 컨테이너를보고 PORTS칸에서 포트 매핑상태를 확인가능(정상일때)0.0.0.0:8080->80/tcp|내문제:80/tcp |
+| 해결/대안 | 가장 확실한 방법: 컨테이너 삭제 후 다시 생성 |
 
 ---
 
@@ -317,33 +299,22 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ### B-1. Docker Compose 기초
 
-```yaml
--실습미수행-
-```
+
 
 ### B-2. Docker Compose 멀티 컨테이너
 
-```bash
--실습미수행-
-```
+
 
 ### B-3. Compose 운영 명령어
 
-```bash
--실습미수행-
-```
+
 
 ### B-4. 환경 변수 활용
 
-```bash
--실습미수행-
-```
+
 
 ### B-5. GitHub SSH 키 설정
 
-```bash
--실습미수행-
-```
 
 ---
 
@@ -1102,3 +1073,193 @@ PS C:\Users\rlawjd85206977\Mission1_1> docker run -d -p 8080:80 --name my-web my
 PS C:\Users\rlawjd85206977\Mission1_1> docker ps
 CONTAINER ID   IMAGE          COMMAND                   CREATED         STATUS         PORTS                                     NAMES
 73ab72933faa   my-nginx:1.0   "/docker-entrypoint.…"   4 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ [200~docker run -d --name web-bind -p 8080:80 \
+>   -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+>   -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+>   nginx~docker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginxdocker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginxdocker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginxdocker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginx[3~
+bash: [200~docker: command not found
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginx
+3a5c022f5c44cd3e0b8cc2c2cd2cfb693073afcaf8338f35e389ef843a36f774
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint web-bind (a708b9cf39054816da43c820fa370fa70d2f604b2baf69c62b6b41a8915b2967): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+Run 'docker run --help' for more information
+
+What's next:
+    Debug this container error with Gordon → docker ai "help me fix this container error"
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                   CREATED             STATUS             PORTS                                     NAMES
+73ab72933faa   my-nginx:1.0   "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker stop my-web
+my-web
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginx
+docker: Error response from daemon: Conflict. The container name "/web-bind" is already in use by container "3a5c022f5c44cd3e0b8cc2c2cd2cfb693073afcaf8338f35e389ef843a36f774". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+
+What's next:
+    Debug this container error with Gordon → docker ai "help me fix this container error"
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                   CREATED             STATUS                     PORTS     NAMES
+3a5c022f5c44   nginx          "/docker-entrypoint.…"   11 minutes ago      Created                              web-bind
+73ab72933faa   my-nginx:1.0   "/docker-entrypoint.…"   About an hour ago   Exited (0) 5 minutes ago             my-web
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker start web-bind
+web-bind
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS         PORTS     NAMES
+3a5c022f5c44   nginx     "/docker-entrypoint.…"   16 minutes ago   Up 3 minutes   80/tcp    web-bind
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker port web-bind
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ #####트러블! 삭제없이 포트 매핑 추가하는건 불가능!######
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ #원인은 모르지만 컨테이너 내부 80번 포트는 열렸지만 8080포트와 연결x####
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ #삭제후 다시 생성
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker rm -f web-bind
+web-bind
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker run -d --name web-bind -p 8080:80 \
+  -v "$(pwd)/index.html:/usr/share/nginx/html/index.html" \
+  -v "$(pwd)/assets:/usr/share/nginx/html/assets" \
+  nginx
+3edf5e2f18fa41f51c7bde9c64cc51288525bafa9621c2f2b09f715495ed5b02
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker volume create myvol
+myvol
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     myvol
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker run -it --name vol-test -v myvol:/data alpine
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+881fc932939e: Pull complete 
+86ff264fe568: Download complete 
+c35a7d82b8fa: Download complete 
+Digest: sha256:3f4d6b32e26703c6082839234f43769d5046b3ac7c910033911d1e71d8cd630a
+Status: Downloaded newer image for alpine:latest
+/ # echo "Hello Volume" > /data/test.txt
+/ # cat /data/test.txt
+Hello Volume
+/ # exit
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                   CREATED          STATUS                      PORTS                                     NAMES
+d5027da5507b   alpine         "/bin/sh"                 37 seconds ago   Exited (0) 8 seconds ago                                              vol-test
+3edf5e2f18fa   nginx          "/docker-entrypoint.…"   11 minutes ago   Up 11 minutes               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   web-bind
+73ab72933faa   my-nginx:1.0   "/docker-entrypoint.…"   2 hours ago      Exited (0) 23 minutes ago                                             my-web
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker rm vol-test
+vol-test
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ #볼륨은 그대로두고 컨테이너만 지움 그럼에도 이전에 만든 파일이그대로 있는지 확인(영속성)
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ docker run -it --name vol-test2 -v myvol:/data alpine
+/ # cat /data/test.txt
+Hello Volume
+/ # EXIT
+/bin/sh: EXIT: not found
+/ # exit
+
+What's next:
+    Debug this container error with Gordon → docker ai "help me fix this container error"
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ git config --global user.name "Pikachu141695"
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ git config --global user.email "ggamilove@gmail.com"
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ git config --global init.defaultBranch main
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ git config --list
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=schannel
+core.autocrlf=true
+core.fscache=true
+core.symlinks=false
+pull.rebase=false
+credential.helper=manager
+credential.https://dev.azure.com.usehttppath=true
+init.defaultbranch=master
+user.name=Pikachu141695
+user.email=ggamilove@gmail.com
+init.defaultbranch=main
+core.repositoryformatversion=0
+core.filemode=false
+core.bare=false
+core.logallrefupdates=true
+core.symlinks=false
+core.ignorecase=true
+remote.origin.url=https://github.com/Pikachu141695/Mission1_1.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+branch.master.vscode-merge-base=origin/master
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (master)
+$ git branch -M main
+
+rlawjd85206977@GNIA-C202-B06 UCRT64 C:/Users/rlawjd85206977/Mission1_1 (main)
+$ git remote -v
+origin  https://github.com/Pikachu141695/Mission1_1.git (fetch)
+origin  https://github.com/Pikachu141695/Mission1_1.git (push)
