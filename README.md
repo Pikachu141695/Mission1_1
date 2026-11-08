@@ -231,11 +231,11 @@ docker run -d --name web-bind -p 8080:80 \
 
 ### 8-2. 호스트 변경 전 화면
 
-> ![호스트변경전](image.png)
+![호스트변경전](image.png)
 
 ### 8-3. 호스트 변경 후 화면
 
-> ![변경후](image.png)
+![변경후](image.png)
 
 ---
 
