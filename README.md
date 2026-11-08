@@ -51,6 +51,7 @@
 
 ```
 ![basic_operation](/assets/basic_operation_1.png)
+
 ```
 
 ### 1-2. 파일 내용 확인 / 빈 파일 생성
