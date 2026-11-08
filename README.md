@@ -50,8 +50,8 @@
 ### 1-1. 현재 위치 / 목록 확인 (숨김 파일 포함) / 폴더 이동 / 생성 / 복사 / 이동·이름변경 / 삭제
 
 ```
-![basic_operation](/assets/basic_operation_1.png)
-
+assets/basic_operation_1.png
+2
 ```
 
 ### 1-2. 파일 내용 확인 / 빈 파일 생성
