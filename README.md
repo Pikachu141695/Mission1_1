@@ -146,9 +146,12 @@
 
 ![attach](./assets/image-8.png)
 ![attach2](./assets/image-9.png)
-exit시 nginx 컨테이너 중지됌#용도:로그 모니터링
+|exit시 nginx 컨테이너 중지됌#용도:로그 모니터링|
+
+
+
 ![exec](./assets/image-10.png)
-exit시 nginx 컨테이너 중지안됌#용도:작업,디버깅
+|exit시 nginx 컨테이너 중지안됌#용도:작업,디버깅|
 
 
 ---
