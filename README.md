@@ -231,11 +231,11 @@ docker run -d --name web-bind -p 8080:80 \
 
 ### 8-2. 호스트 변경 전 화면
 
-![호스트변경전](image.png)
+![호스트변경전](./assets/before.png)
 
 ### 8-3. 호스트 변경 후 화면
 
-![변경후](image.png)
+![변경후](./assets/after.png)
 
 ---
 
@@ -243,15 +243,15 @@ docker run -d --name web-bind -p 8080:80 \
 
 ### 9-1. 볼륨 생성 및 컨테이너 연결
 
-![볼륨연결](image.png)
+![볼륨연결](./assets/V.png)
 
 ### 9-2. 컨테이너 삭제 전 데이터 확인
 
-![V_BEFORE](image.png)
+![V_BEFORE](./assets/V_BEFORE.png)
 
 ### 9-3. 컨테이너 삭제 후 데이터 확인 (영속성 증명)
 
-![V_AFTER](image.png)
+![V_AFTER](./assets/V_AFTER.png)
 ---
 
 ## 10. Git 설정 및 GitHub 연동
@@ -260,15 +260,15 @@ docker run -d --name web-bind -p 8080:80 \
 
 ### 10-1. Git 사용자 정보 / 기본 브랜치 설정
 
-![alt text](image.png)
+![alt text](./assets/git1.png)
 
 ### 10-2. git config --list 결과
-![alt text](image.png)
+![alt text](./assets/gitlis.png)
 
 
 ### 10-3. GitHub 연동 증거
 
-![alt text](image.png)
+![alt text](./assets/gitremote.png)
 
 
 ---
@@ -288,7 +288,7 @@ docker run -d --name web-bind -p 8080:80 \
 
 | 항목 | 내용 |
 |------|------|
-| 문제:포트 매핑 추가는 불가능| ![trouble](image.png) |
+| 문제:포트 매핑 추가는 불가능| ![trouble](./assets/trouble.png) |
 | 원인 가설 | 컨테이너를 이미 만든 뒤에는 -p 8080:80 같은 포트 매핑을 “추가”할 수 없기 때문 |
 | 확인 방법 | docker ps로 실행중인 컨테이너를보고 PORTS칸에서 포트 매핑상태를 확인가능(정상일때)0.0.0.0:8080->80/tcp|내문제:80/tcp |
 | 해결/대안 | 가장 확실한 방법: 컨테이너 삭제 후 다시 생성 |
