@@ -309,9 +309,9 @@ docker run -d --name web-bind -p 8080:80 \
 | 항목 | 내용 |
 |------|------|
 | 문제 발견 : chmod +x 가 적용 안됌 | ![trouble_case1](assets/trouble_case1.png) |
-| 원인 : Windows 환경 제한 |
+| 원인  |Windows 환경 제한|
 | 확인 방법 |네이토에게 질문 |
-| 해결/대안:해결 실패 Windows NTFS 파일시스템은 Linux 권한 체계를 완전히 지원하지 않음 |
+| 해결/대안 |해결 실패 Windows NTFS 파일시스템은 Linux 권한 체계를 완전히 지원하지 않음|
 
 ### Case 2: 
 
